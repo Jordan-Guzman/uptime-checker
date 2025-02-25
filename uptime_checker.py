@@ -1,6 +1,18 @@
 import requests
 import schedule
 import time
+import logging
+
+# Configure logging to write a file with timestamps
+logging.basicConfig(
+	filename="uptime_checker.log",
+	level=logging.INFO,
+	format="%(asctime)s - %(levelname)s - %(message)s",
+)
+
+def log_status(url, status):
+	"""Log the status of the website"""
+	logging.info(f"{url} is {status}")
 
 # List of websites to monitor
 URLS = ["https://example.com", "https://yourclientside.com", "https://www.github.com", "https://downforeveryoneorjustme.com"]
