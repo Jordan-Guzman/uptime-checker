@@ -1,0 +1,14 @@
+2025-02-24 16:40:30,171 - INFO - https://example.com is UP
+2025-02-24 16:40:32,366 - INFO - https://yourclientside.com is Unreachable (Attempt 1)
+2025-02-24 16:40:39,386 - INFO - https://yourclientside.com is Unreachable (Attempt 2)
+2025-02-24 16:40:46,415 - INFO - https://yourclientside.com is Unreachable (Attempt 3)
+2025-02-24 16:40:46,415 - INFO - https://yourclientside.com is DOWN after 3 retries
+2025-02-24 16:40:46,767 - INFO - https://www.github.com is UP
+2025-02-24 16:40:46,847 - INFO - https://downforeveryoneorjustme.com is DOWN (Status: 403)
+2025-02-24 16:44:49,626 - INFO - https://example.com is UP
+2025-02-24 16:44:51,655 - INFO - https://yourclientside.com is Unreachable (Attempt 1)
+2025-02-24 16:44:58,691 - INFO - https://yourclientside.com is Unreachable (Attempt 2)
+2025-02-24 16:45:05,723 - INFO - https://yourclientside.com is Unreachable (Attempt 3)
+2025-02-24 16:45:05,723 - INFO - https://yourclientside.com is DOWN after 3 retries
+2025-02-24 16:45:06,465 - INFO - https://www.github.com is UP
+2025-02-24 16:45:06,547 - INFO - https://downforeveryoneorjustme.com is DOWN (Status: 403)

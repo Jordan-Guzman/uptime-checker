@@ -19,18 +19,32 @@ URLS = ["https://example.com", "https://yourclientside.com", "https://www.github
 DISCORD_WEBHOOk = "https://discord.com/api/webhooks/1343700023287877703/yMt4UFl9vVGX6Cdacow_Vrdmr15NiB56U_-Y-xfTGbcIJZxqbwRZT36LvlbsiAxDPV5i"
 
 # Check website status
-def check_websites():
-	for url in URLS:
+def check_websites(url, retries=3, delay=5):
+	"""Check website status with retry mechanism"""
+	for attempt in range(1, retries + 1):
 		try:
-			response = requests.get(url, timeout=1)
+			response = requests.get(url, timeout=2)
+
 			if response.status_code == 200:
 				print(f"{url} is UP")
+				log_status(url, "UP")
+				return True
 			else:
-				print(f"{url} is DOWN")
-				send_alert(url)
-		except requests.exceptions.RequestException:
-			print(f"{url} is DOWN")
-			send_alert(url)
+				print(f"{url} is DOWN (Status: {response.status_code})")
+				log_status(url, f"DOWN (Status: {response.status_code})")
+				return False
+		
+		except requests.exceptions.RequestException as e:
+			print(f"Attempt {attempt}: {url} is unreachable - {e}")
+			log_status(url, f"Unreachable (Attempt {attempt})")
+
+			if attempt < retries:
+				print(f"Retrying in {delay} seconds...")
+				time.sleep(delay)
+
+	print(f"{url} is DOWN after {retries} retries")
+	log_status(url, f"DOWN after {retries} retries")
+	return False
 
 # Schedule the check eveery minute
 schedule.every(1).minutes.do(check_websites)
@@ -39,7 +53,5 @@ def send_alert(url):
 	message = {"content": f"{url} is DOWN!"}
 	requests.post(DISCORD_WEBHOOk, json=message)
 
-# Run the scheduler
-while True:
-	schedule.run_pending()
-	time.sleep(1)
+for url in URLS:
+	check_websites(url)
